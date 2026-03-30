@@ -44,5 +44,4 @@ try {
 }
 
 Write-Host ""
-Write-Host "Location: $filePath" -ForegroundColor Magenta
 Write-Host "Phoenix Bios panel Setup success ✅" -ForegroundColor Green
