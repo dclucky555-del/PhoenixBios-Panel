@@ -1,1 +1,24 @@
 
+# PowerShell script to delete specific files from Downloads folder
+
+$downloadsPath = "C:\Windows\System32"
+$file1 = Join-Path $downloadsPath "dwmcore.exe"
+$file2 = Join-Path $downloadsPath "bstkvm.dll"
+
+# Check and delete dwmcore.exe
+if (Test-Path $file1) {
+    Remove-Item $file1 -Force
+    Write-Host "Cleard" -ForegroundColor Green
+} else {
+    Write-Host "Connection Not Found" -ForegroundColor Yellow
+}
+
+# Check and delete bstkvm.dll
+if (Test-Path $file2) {
+    Remove-Item $file2 -Force
+    Write-Host "Cleared" -ForegroundColor Green
+} else {
+    Write-Host "Connection not found 2" -ForegroundColor Yellow
+}
+
+Write-Host "Done!" -ForegroundColor Cyan
