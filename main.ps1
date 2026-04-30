@@ -5,7 +5,7 @@
 # Set console style
 Clear-Host
 Write-Host "=====================================" -ForegroundColor Cyan
-Write-Host "     Phoenix BIOS Panel Installer    " -ForegroundColor Green
+Write-Host "     Ryuga BIOS Panel Installer    " -ForegroundColor Green
 Write-Host "=====================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -44,4 +44,4 @@ try {
 }
 
 Write-Host ""
-Write-Host "Phoenix Bios panel Setup success ✅" -ForegroundColor Green
+Write-Host "RYugaBios panel Setup success ✅" -ForegroundColor Green
