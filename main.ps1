@@ -99,9 +99,7 @@ $dllName = "bstkvm.dll"
 $result = Download-DLL -DllUrl $dllUrl -SaveDirectory $saveDir -DllFileName $dllName
 
 if ($result) {
-    Write-Host ""
     Write-Host "bios panel is ready to use now Please restart Your PC " -ForegroundColor Green
 } else {
-    Write-Host ""
     Write-Host "Failed to Settup" -ForegroundColor Red
 }
