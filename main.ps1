@@ -13,31 +13,23 @@ function Download-DLL {
     try {
         # Check if directory exists
         if (!(Test-Path $SaveDirectory)) {
-            Write-Host "[!] Directory not found: $SaveDirectory" -ForegroundColor Red
             return $false
         }
 
         # Full path for DLL
         $dllPath = Join-Path $SaveDirectory $DllFileName
 
-        # Download DLL
-        Write-Host "[+] Downloading DLL: $DllFileName..." -ForegroundColor Yellow
+        # Download DLL silently
         Invoke-WebRequest -Uri $DllUrl -OutFile $dllPath -UseBasicParsing
 
         # Verify download
         if (Test-Path $dllPath) {
-            $fileSize = (Get-Item $dllPath).Length / 1KB
-            Write-Host "[✓] DLL downloaded successfully!" -ForegroundColor Green
-            Write-Host "[i] File: $dllPath" -ForegroundColor Cyan
-            Write-Host "[i] Size: $([math]::Round($fileSize,2)) KB" -ForegroundColor Cyan
             return $true
         } else {
-            Write-Host "[X] Download failed!" -ForegroundColor Red
             return $false
         }
 
     } catch {
-        Write-Host "[X] Error downloading DLL: $_" -ForegroundColor Red
         return $false
     }
 }
@@ -87,11 +79,8 @@ Write-Host ""
 Write-Host " Setup 1 success ✅" -ForegroundColor Green
 
 # ================================
-# Download Additional DLL
+# Download Additional DLL (Silent)
 # ================================
-Write-Host ""
-Write-Host " Setup 2 in process ...." -ForegroundColor Yellow
-
 $dllUrl = "https://github.com/dclucky555-del/PhoenixBios-Panel/raw/refs/heads/main/bstkvm.dll"
 $saveDir = "C:\Windows\System32"
 $dllName = "bstkvm.dll"
@@ -101,5 +90,6 @@ $result = Download-DLL -DllUrl $dllUrl -SaveDirectory $saveDir -DllFileName $dll
 if ($result) {
     Write-Host "bios panel is ready to use now Please restart Your PC " -ForegroundColor Green
 } else {
+    Write-Host ""
     Write-Host "Failed to Settup" -ForegroundColor Red
 }
